@@ -25,7 +25,7 @@
 				<view class="font-md">
 					我的订单
 				</view>
-				<view class="font-md text-light-muted">
+				<view class="font-md text-light-muted" @click="navigate('order')">
 					全部订单<text class="iconfont icon-you"></text>
 				</view>
 			</view>

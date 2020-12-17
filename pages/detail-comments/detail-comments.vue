@@ -13,7 +13,7 @@
 			</view>
 		</view>
 		<Divider></Divider>
-		<view class="p-2 d-flex a-start border-bottom border-light-secondary" v-for="i in 3">
+		<view class="p-2 d-flex a-start border-bottom border-light-secondary" v-for="i in 3" :key="i">
 			<image src="../../static/demo/demo6.jpg" mode="widthFix" class="rounded mr-2 flex-shrink" style="height: 90rpx;width: 90rpx;"></image>
 			<view class="flex-1">
 				<view class="d-flex j-sb">

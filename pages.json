@@ -244,6 +244,37 @@
             }
             
         }
+        ,{
+            "path" : "pages/order/order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的订单",
+                "enablePullDownRefresh": false,
+								"app-plus":{
+									"scrollIndicator":"none",
+									"titleNView":{
+										"buttons":[
+											{
+												"float":"right",
+												"fontSrc":"/static/font/iconfont.ttf",
+												"text":"\ue60c",
+												"color":"#999999",
+												"colorPressed":"#BBB",
+												"fontSize":"16px"
+											},{
+												"float":"right",
+												"fontSrc":"/static/font/iconfont.ttf",
+												"text":"\ue6e3",
+												"color":"#999999",
+												"colorPressed":"#BBB",
+												"fontSize":"16px"
+											}
+										]
+									}
+								}
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
