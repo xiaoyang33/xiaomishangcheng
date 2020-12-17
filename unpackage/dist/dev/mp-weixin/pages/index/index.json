@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "首页 ",
+  "usingComponents": {
+    "swiper-img": "/components/index/SwiperImg",
+    "king-kong": "/components/index/KingKong",
+    "three-adv": "/components/index/ThreeAdv",
+    "card": "/components/common/Card",
+    "common-list": "/components/common/CommonList",
+    "top-choose-list": "/components/index/TopChooseList"
+  }
+}

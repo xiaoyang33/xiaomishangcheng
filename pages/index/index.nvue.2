@@ -1,0 +1,126 @@
+<template>
+	<div>
+		<list show-scrollbar="false">
+			<cell>
+				<!-- 轮播图 -->
+				<Y-Slider :swipers="swipers" />
+
+				<!-- 金刚位 -->
+				<YKingKong :kingKong="kingKong" />
+
+				<!-- 全局分割线 -->
+				<YDivider />
+
+				<!-- 三图组件 -->
+				<YThreeAdv :item="threeData"/>
+				<YDivider />
+
+				<!-- 大图广告 -->
+				<YBigAdv :item="bigAdvData"/>
+				
+				<!-- 公共列表组件  -->
+				 <YCommonList :resData = "commonList"></YCommonList>
+			</cell>
+		</list>
+	</div>
+</template>
+
+<script>
+import YSlider from '@/components/index/nvue/Y-Slider.nvue';
+import YKingKong from '@/components/index/nvue/Y-KingKong.nvue';
+import YDivider from '@/components/index/nvue/Y-Divider.nvue';
+import YThreeAdv from '@/components/index/nvue/Y-ThreeAdv.nvue';
+import YBigAdv from '@/components/index/nvue/Y-BigAdv.nvue'
+import YCommonList from '@/components/index/nvue/Y-CommonList.nvue'
+export default {
+	components: {
+		YSlider,
+		YKingKong,
+		YDivider,
+		YThreeAdv,
+		YBigAdv,
+		YCommonList
+	},
+	data() {
+		return {
+			swipers: [{ src: '/static/demo/demo4.jpg' }, { src: '/static/demo/demo4.jpg' }, { src: '/static/demo/demo4.jpg' }],
+			kingKong: [
+				{
+					url: '/static/indexnav/1.png',
+					title: '新品发布'
+				},
+				{
+					url: '/static/indexnav/2.gif',
+					title: '小米众筹'
+				},
+				{
+					url: '/static/indexnav/3.gif',
+					title: '以旧换新'
+				},
+				{
+					url: '/static/indexnav/4.gif',
+					title: '1分拼团'
+				},
+				{
+					url: '/static/indexnav/5.gif',
+					title: '超值特卖'
+				},
+				{
+					url: '/static/indexnav/6.gif',
+					title: '小米秒杀'
+				},
+				{
+					url: '/static/indexnav/7.gif',
+					title: '真心想要'
+				},
+				{
+					url: '/static/indexnav/8.gif',
+					title: '电视热卖'
+				},
+				{
+					url: '/static/indexnav/9.gif',
+					title: '家店热卖'
+				},
+				{
+					url: '/static/indexnav/10.gif',
+					title: '米粉卡'
+				}
+			],
+			threeData:{
+				big:'/static/demo/demo1.jpg',
+				rTop:'/static/demo/demo2.jpg',
+				rBottom:'/static/demo/demo3.jpg'
+			},
+			bigAdvData:{
+				title:'每日精选',
+				url:'/static/demo/demo4.jpg'
+			},
+			commonList:[
+				{
+					cover:'/static/demo/list/1.jpg',
+					title:'小米空调',
+					desc:'1.5匹变频',
+					nPrice:2199,
+					oPrice:2999
+				},{
+					cover:'/static/demo/list/2.jpg',
+					title:'小米空调',
+					desc:'1.5匹变频',
+					nPrice:2199,
+					oPrice:2999
+				},{
+					cover:'/static/demo/list/3.jpg',
+					title:'小米空调',
+					desc:'1.5匹变频',
+					nPrice:2199,
+					oPrice:2999
+				},
+			]
+		};
+	}
+};
+</script>
+
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+</style>

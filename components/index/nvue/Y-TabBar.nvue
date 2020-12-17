@@ -1,0 +1,65 @@
+<template>
+	<div>
+		<div class="w-100 " style="height: 75px;flex-shrink:0">
+			<scroller class="w-100 flex-row" scroll-direction="horizontal" :show-scrollbar="false">
+				<div v-for="(item,index) in tabData" :key="index" 
+				style="width: 120px;height: 75px;" 
+				class="j-center a-center"
+				@click="handleClick(index)"
+				 :ref="`tab${index}`"
+				>
+					<text 
+					style="height: 75px;line-height: 75px;border-bottom-width: 5px;border-style: solid;"
+					:style="{'color':tabIndex == index ? '#FD6810':'#ccc','border-color':tabIndex === index ? '#FD6810' : '#fff'}" 
+					class="font-md">{{item.name}}</text>
+				</div>
+			</scroller>
+		</div>
+	</div>
+</template>
+
+<script>
+	const dom = weex.requireModule('dom')
+	export default {
+		props:{
+			tabIndex:{
+				type:Number,
+				default:0
+			},
+			tabData:{
+				type:Array,
+				default:[]
+			}
+		},
+		watch:{
+			tabIndex(newVal){
+				this.handleClick(newVal)
+			},
+			tabData(){
+				console.log(this.tabData)
+			}
+		},
+		methods:{
+			async handleClick(index){
+				// 选项卡改变事件
+				this.$emit('tabChange',index)
+				// 拿到当前元素
+				let el = this.$refs[`tab${index}`][0]
+				// 获取当前元素的信息
+				dom.getComponentRect(el,(e)=>{
+					if(e.size.right > 750){
+						let newEl = this.$refs[`tab${index - 4}`][0]
+						dom.scrollToElement(newEl,{})
+					}
+					if(e.size.left < 0){
+						dom.scrollToElement(el,{})
+					}
+				})
+			},
+		}
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>

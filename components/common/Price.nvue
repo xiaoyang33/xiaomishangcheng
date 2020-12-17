@@ -1,0 +1,19 @@
+<template>
+	<div>
+		<div class="row" >
+			<text class="font-sm" style="color: #FD6801;">￥</text>
+			<text style="font-size: 32px;color: #FD6801;"><slot/></text>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		
+	}
+</script>
+
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>

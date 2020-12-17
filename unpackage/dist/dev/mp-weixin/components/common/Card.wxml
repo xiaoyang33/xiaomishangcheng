@@ -1,0 +1,1 @@
+<view class="card"><block wx:if="{{showHead}}"><view class="font-md font-weight p-2 border-bottom main-border-color"><block wx:if="{{$slots.title}}"><slot name="title"></slot></block><block wx:else><block wx:if="{{title}}"><text>{{title}}</text></block></block></view></block><block wx:if="{{coverImg}}"><image src="{{coverImg}}" mode="widthFix"></image></block><slot></slot></view>

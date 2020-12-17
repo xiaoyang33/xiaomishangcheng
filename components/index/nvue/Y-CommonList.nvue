@@ -1,0 +1,46 @@
+<template>
+	<div>
+		<!-- 公共列表组件
+			间隙5px
+			每列占375px
+		 -->
+		<div class="row w-100" @click="goDetail">
+			<div class="col-6" v-for="(item,index) in resData" :key="index">
+				<image :src="item.coverImg"
+				 style="height: 370px;width: 370px; padding-left: 2.5px;padding-right: 2.5px;">
+				 </image>
+					<div class="px-2">
+						<text class="text-dark font-md py-1" style="lines: 1;">{{item.name}}</text>
+						<text class="text-light-muted font-sm" style="lines: 1;">{{item.desc}}</text>
+						<div class="row py-1 a-end">
+							<Price>{{item.nPrice}}</Price>
+							<text class="line-through text-light-muted font-sm ml-1">￥{{item.oPrice}}</text>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	import Price from '@/components/common/Price.nvue'
+	export default {
+		components:{
+			Price
+		},
+		props:{
+			resData:Array
+		},
+		methods:{
+			goDetail(){
+				uni.navigateTo({
+					url:'/pages/Detail/Detail'
+				})
+			}
+		}
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>

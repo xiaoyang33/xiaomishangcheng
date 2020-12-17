@@ -1,0 +1,1 @@
+<view><button type="primary" data-event-opts="{{[['tap',[['chageIndex',['$event']]]]]}}" bindtap="__e">点击修改数据</button></view>

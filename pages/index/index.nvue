@@ -1,0 +1,444 @@
+<template>
+	<div>
+		<YTabBar :tabData="tabData" :tabIndex="tabIndex" @tabChange="handleTabChange" />
+		<slider class="flex-1" :index="tabIndex" :infinite="false" @change="sliderChange">
+			<list show-scrollbar="false" v-for="(indexItem, indexNum) in indexData" :key="indexNum">
+				<refresh @refresh="handleRefresh" :display="isRefresh" @pullingdown="pullingdown" style="height: 80px;" class="flex-row j-center a-center ">
+					<text class="text-muted">{{ refreshText }}</text>
+				</refresh>
+				<template v-if="indexData[indexNum].name === '关注'">
+						<cell v-for="(item,index) in indexData[indexNum].data" :key="index">
+							<!-- 轮播图 -->
+							<Y-Slider v-if="item.type === 'swiper'" :swipers="item.data" />
+							
+							<template v-if="item.type === 'kingKong'">
+								<!-- 金刚位 -->
+								<YKingKong :kingKong="item.data" />
+								<!-- 全局分割线 -->
+								<YDivider />
+							</template>
+							
+
+							<template v-if="item.type === 'threeData'">
+								<!-- 三图组件 -->
+								<YThreeAdv :item="item.data" />
+								<YDivider />
+							</template>
+
+							<!-- 大图广告 -->
+							<YBigAdv v-if="item.type === 'bigAdv'" :item="item.data" />
+
+							<!-- 公共列表组件  -->
+							<YCommonList  v-if="item.type === 'commonList'" :resData="item.data"></YCommonList>
+						</cell>
+				</template>
+				<loading class="flex-row j-center a-center" :display="isLoading" @loading="loading" style="height: 80px;"><text class="text-muted">Loading...</text></loading>
+			</list>
+		</slider>
+	</div>
+</template>
+
+<script>
+let indexData = [
+	{
+		name: '关注',
+		refreshText: '下拉可以刷新',
+		isRefresh: 'hide',
+		isLoading: 'hide',
+		data: [
+			{
+				type: 'swiper',
+				data: [
+					{
+						src: '/static/demo/demo4.jpg'
+					},
+					{
+						src: '/static/demo/demo4.jpg'
+					},
+					{
+						src: '/static/demo/demo4.jpg'
+					}
+				]
+			},
+			{
+				type: 'kingKong',
+				data: [
+					{
+						url: '/static/indexnav/1.png',
+						title: '新品发布'
+					},
+					{
+						url: '/static/indexnav/2.gif',
+						title: '小米众筹'
+					},
+					{
+						url: '/static/indexnav/3.gif',
+						title: '以旧换新'
+					},
+					{
+						url: '/static/indexnav/4.gif',
+						title: '1分拼团'
+					},
+					{
+						url: '/static/indexnav/5.gif',
+						title: '超值特卖'
+					},
+					{
+						url: '/static/indexnav/6.gif',
+						title: '小米秒杀'
+					},
+					{
+						url: '/static/indexnav/7.gif',
+						title: '真心想要'
+					},
+					{
+						url: '/static/indexnav/8.gif',
+						title: '电视热卖'
+					},
+					{
+						url: '/static/indexnav/9.gif',
+						title: '家店热卖'
+					},
+					{
+						url: '/static/indexnav/10.gif',
+						title: '米粉卡'
+					}
+				]
+			},
+			{
+				type: 'threeData',
+				data: {
+					big: {
+						url: '/static/demo/demo1.jpg'
+					},
+					rightTop: {
+						url: '/static/demo/demo2.jpg'
+					},
+					rightBottom: {
+						url: '/static/demo/demo3.jpg'
+					}
+				}
+			},
+			{
+				type:'bigAdv',
+				data: {
+					title: '每日精选',
+					url: '/static/demo/demo4.jpg'
+				},
+			},
+			{
+				type: 'commonList',
+				data: [
+					{
+						coverImg: '/static/demo/list/1.jpg',
+						title: '米家空调',
+						desc: '1.5匹变频',
+						oPrice: 2699,
+						nPrice: 2199
+					},
+					{
+						coverImg: '/static/demo/list/1.jpg',
+						title: '米家空调',
+						desc: '1.5匹变频',
+						oPrice: 2699,
+						nPrice: 2199
+					},
+					{
+						coverImg: '/static/demo/list/1.jpg',
+						title: '米家空调',
+						desc: '1.5匹变频',
+						oPrice: 2699,
+						nPrice: 2199
+					},
+					{
+						coverImg: '/static/demo/list/1.jpg',
+						title: '米家空调',
+						desc: '1.5匹变频',
+						oPrice: 2699,
+						nPrice: 2199
+					},
+					{
+						coverImg: '/static/demo/list/1.jpg',
+						title: '米家空调',
+						desc: '1.5匹变频',
+						oPrice: 2699,
+						nPrice: 2199
+					}
+				]
+			}
+		]
+	},
+	{
+		refreshText: '下拉可以刷新',
+		isRefresh: 'hide',
+		isLoading: 'hide',
+		name: '推荐'
+	},
+	{
+		refreshText: '下拉可以刷新',
+		isRefresh: 'hide',
+		isLoading: 'hide',
+		name: '体育'
+	},
+	{
+		refreshText: '下拉可以刷新',
+		isRefresh: 'hide',
+		isLoading: 'hide',
+		name: '热点'
+	},
+	{
+		refreshText: '下拉可以刷新',
+		isRefresh: 'hide',
+		isLoading: 'hide',
+		name: '财经'
+	},
+	{
+		refreshText: '下拉可以刷新',
+		isRefresh: 'hide',
+		isLoading: 'hide',
+		name: '娱乐'
+	},
+	{
+		refreshText: '下拉可以刷新',
+		isRefresh: 'hide',
+		isLoading: 'hide',
+		name: '军事'
+	},
+	{
+		refreshText: '下拉可以刷新',
+		isRefresh: 'hide',
+		isLoading: 'hide',
+		name: '本地'
+	}
+];
+let dataList = [
+	{
+		type: 'swiper',
+		data: [
+			{
+				url: '/static/demo/demo4.jpg'
+			},
+			{
+				url: '/static/demo/demo4.jpg'
+			},
+			{
+				url: '/static/demo/demo4.jpg'
+			}
+		]
+	},
+	{
+		type: 'kingKong',
+		data: [
+			{
+				url: '/static/indexnav/1.png',
+				title: '新品发布'
+			},
+			{
+				url: '/static/indexnav/2.gif',
+				title: '小米众筹'
+			},
+			{
+				url: '/static/indexnav/3.gif',
+				title: '以旧换新'
+			},
+			{
+				url: '/static/indexnav/4.gif',
+				title: '1分拼团'
+			},
+			{
+				url: '/static/indexnav/5.gif',
+				title: '超值特卖'
+			},
+			{
+				url: '/static/indexnav/6.gif',
+				title: '小米秒杀'
+			},
+			{
+				url: '/static/indexnav/7.gif',
+				title: '真心想要'
+			},
+			{
+				url: '/static/indexnav/8.gif',
+				title: '电视热卖'
+			},
+			{
+				url: '/static/indexnav/9.gif',
+				title: '家店热卖'
+			},
+			{
+				url: '/static/indexnav/10.gif',
+				title: '米粉卡'
+			}
+		]
+	},
+	{
+		type: 'threeData',
+		data: {
+			big: {
+				url: '/static/demo/demo1.jpg'
+			},
+			rightTop: {
+				url: '/static/demo/demo2.jpg'
+			},
+			rightBottom: {
+				url: '/static/demo/demo3.jpg'
+			}
+		}
+	},
+	{
+		type: 'commonList',
+		data: [
+			{
+				coverImg: '/static/demo/list/1.jpg',
+				title: '米家空调',
+				desc: '1.5匹变频',
+				oPrice: 2699,
+				nPrice: 2199
+			},
+			{
+				coverImg: '/static/demo/list/1.jpg',
+				title: '米家空调',
+				desc: '1.5匹变频',
+				oPrice: 2699,
+				nPrice: 2199
+			},
+			{
+				coverImg: '/static/demo/list/1.jpg',
+				title: '米家空调',
+				desc: '1.5匹变频',
+				oPrice: 2699,
+				nPrice: 2199
+			},
+			{
+				coverImg: '/static/demo/list/1.jpg',
+				title: '米家空调',
+				desc: '1.5匹变频',
+				oPrice: 2699,
+				nPrice: 2199
+			},
+			{
+				coverImg: '/static/demo/list/1.jpg',
+				title: '米家空调',
+				desc: '1.5匹变频',
+				oPrice: 2699,
+				nPrice: 2199
+			}
+		]
+	}
+];
+const dom = weex.requireModule('dom');
+import YTabBar from '@/components/index/nvue/Y-TabBar.nvue';
+import YSlider from '@/components/index/nvue/Y-Slider.nvue';
+import YKingKong from '@/components/index/nvue/Y-KingKong.nvue';
+import YDivider from '@/components/index/nvue/Y-Divider.nvue';
+import YThreeAdv from '@/components/index/nvue/Y-ThreeAdv.nvue';
+import YBigAdv from '@/components/index/nvue/Y-BigAdv.nvue';
+import YCommonList from '@/components/index/nvue/Y-CommonList.nvue';
+import {mapState} from 'vuex'
+export default {
+	components: {
+		YTabBar,
+		YSlider,
+		YKingKong,
+		YDivider,
+		YThreeAdv,
+		YBigAdv,
+		YCommonList
+	},
+	data() {
+		return {
+			refreshText: '下拉可以刷新',
+			isRefresh: 'hide',
+			isLoading: 'hide',
+			tabIndex: 0,
+			indexData: [],
+			tabData: [
+				{
+					name: '关注'
+				},
+				{
+					name: '推荐'
+				},
+				{
+					name: '体育'
+				},
+				{
+					name: '热点'
+				},
+				{
+					name: '财经'
+				},
+				{
+					name: '娱乐'
+				},
+				{
+					name: '军事'
+				},
+				{
+					name: '本地'
+				}
+			]
+		};
+	},
+	onNavigationBarSearchInputClicked(){
+		uni.navigateTo({
+			url:'../search/search'
+		})
+	},
+	computed:{
+		...mapState(['aaa'])
+	},
+	onLoad() {
+		this.init(this.tabIndex);
+		console.log(this.aaa)
+		// uni.onNavigationBarSearchInputClicked(()=>{
+		// 	uni.navigateTo({
+		// 		url:'../search/search'
+		// 	})
+		// })
+	},
+	methods: {
+		// 初始化数据
+		init(index) {
+			this.tabData.forEach(item => {
+				let obj = {};
+				this.indexData.push(obj);
+			});
+			this.indexData[index] = indexData[index];
+			// console.log(this.indexData)
+		},
+		// 处理导航滑动切换
+		handleTabChange(index) {
+			this.tabIndex = index;
+		},
+		// 处理页面左右切换
+		sliderChange(e) {
+			this.handleTabChange(e.index);
+		},
+		handleRefresh() {
+			let index = this.tabIndex
+			console.log(indexData[index])
+			this.isRefresh = 'show';
+			this.refreshText = '正在刷新';
+			setTimeout(() => {
+				this.isRefresh = 'hide';
+				console.log(this.isRefresh)
+			}, 1200);
+		},
+		pullingdown(e) {
+			let index = this.tabIndex
+			this.refreshText = e.pullingDistance > e.viewHeight ? '释放刷新' : '下拉可以刷新';
+		},
+		loading() {
+			let index = this.tabIndex
+			this.isLoading = 'show';
+			setTimeout(() => {
+				this.isLoading = 'hide';
+			}, 1200);
+		}
+	}
+};
+</script>
+
+<style src="@/common/zcm-main-nvue.css"></style>
+<style></style>

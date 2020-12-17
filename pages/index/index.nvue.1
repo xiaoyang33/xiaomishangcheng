@@ -1,0 +1,97 @@
+<template>
+	<div>
+		<text style="font-size: 50px;color: red;">{{ceshi}}</text>
+		<list>
+			<!-- <refresh style="height: 80px;" @refresh="refresh" @pullingdown="pullingdown" :display="show">
+				<text>{{refreshText}}</text>
+			</refresh> -->
+			<cell>
+				<text v-for="item in list" 
+				:key="item" 
+				@click="postMessage(item)"
+				style="height: 300px; background-color: red;border-width: 10px;border-color: #007AFF;border-style: solid;">
+				{{ item }}
+				</text>
+			</cell>
+			<header>
+				<div style="height: 300px; background-color: green;border-width: 10px;border-color: #007AFF;border-style: solid;">
+					asd
+				</div>
+				</header>
+			<cell>
+				<text v-for="item in list" :key="item" 
+				@click="postMessage(item)"
+				style="height: 300px; background-color: red;border-width: 10px;border-color: #007AFF;border-style: solid;">
+				{{ item }}
+				</text>
+			</cell>
+			<loading @loading="onLoading" :display="isLoading" style="height: 100px;align-items: center;justify-content: center;">
+				<text>Loading...</text>
+			</loading>
+		</list>
+	</div>
+</template>
+
+<script>
+export default {
+	data() {
+		return {
+			ceshi:'aaa',
+			isLoading:'hide',
+			list: [1, 2, 3, 4, 5],
+			show:'hide',
+			refreshText:'继续下拉刷新'
+		};
+	},
+	onLoad() {
+		uni.$on('changeIndex',(e)=>{
+			console.log(e)
+			this.ceshi = e.data
+		})
+	},
+	onUnload() {
+		this.$off()
+		
+	},
+	methods:{
+		// nvue vue页面传送数据
+		postMessage(e){
+			// uni.navigateTo({
+			// 	url:'../ceshi/ceshi'
+			// })
+			// uni.$emit('index',{
+			// 	data:e,
+			// 	from:'index'
+			// })
+			getApp().globalData.text = e
+		},
+		// 上拉加载更多
+		onLoading(){
+			this.isLoading = 'show'
+			setTimeout(()=>{
+				this.list = [...this.list,'a','v','h']
+				this.isLoading = 'hide'
+			},1000)
+		},
+		// 执行刷新
+		refresh(e){
+			this.show = 'show'
+			console.log(e)
+			this.refreshText = '刷新中'
+			setTimeout(()=>{
+				this.show = 'hide'
+			},1200)
+		},
+		// 判断下拉刷新状态
+		pullingdown(e){
+			if(e.pullingDistance > e.viewHeight){
+				this.refreshText = '释放刷新'
+			}else{
+				this.refreshText = '继续下拉刷新'
+			}
+		}
+	}
+};
+</script>
+
+<style></style>

@@ -1,0 +1,36 @@
+<template>
+	<div>
+		<slider auto-play="true" interval="3000" show-indicators="true" class="slider">
+			<div v-for="(item,index) in swipers" :key="index" style="position: relative;">
+				<image class="image" :src="item.src" resize="cover"></image>
+			</div>
+			<indicator class="indicator"></indicator>
+		</slider>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:{
+			swipers:Array
+		}
+	}
+</script>
+
+<style scoped>
+.slider,.image{
+		width: 750px;
+		height: 300px;
+	}
+	.indicator{
+		item-color:rgba(255,255,255,.5);
+		item-selected-color:#ffffff;
+		background-color: rgba(0,0,0,0);
+		item-size:15px;
+		width: 150px;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 80px;
+	}
+</style>

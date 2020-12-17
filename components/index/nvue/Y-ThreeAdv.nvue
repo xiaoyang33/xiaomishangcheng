@@ -1,0 +1,29 @@
+<template>
+	<div>
+		<!-- 三图
+			左边 w373 h530
+			右边 w375 h263.5
+		-->
+		<div class="w-100 d-flex j-sb">
+			<div class="col-6">
+				<image :src="item.big.url" resize="cover" style="width: 373px; height: 530px;"></image>
+			</div>
+			<div class="col-6 j-sb">
+				<image :src="item.rightTop.url" style="height: 263.5px;"></image>
+				<image :src="item.rightBottom.url" style="height: 263.5px;"></image>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:{
+			item:Object
+		}
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>

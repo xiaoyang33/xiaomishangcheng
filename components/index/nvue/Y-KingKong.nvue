@@ -1,0 +1,36 @@
+<template>
+	<!-- 金刚位
+			750px
+			内边距20px
+			每一个图标分类142px * 5 = 710px
+			图标 58 * 58 
+			
+	 -->
+	<div>
+		<div class="row w-100 px-2 pb-3">
+			<div class="mt-3 j-center a-center kingkong-item"  v-for="(item,index) in kingKong" :key="index">
+				<image :src="item.url" class="item-image"></image>
+				<text class="font text-muted mt-1">{{item.title}}</text>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:{
+			kingKong:Array
+		}
+	}
+</script>
+
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+.kingkong-item{
+	width: 142px;
+}
+.item-image{
+	width: 58px;
+	height: 58px;
+}
+</style>
